@@ -1,19 +1,17 @@
-w1,w2,b=1,1,1
+w1, w2, b = 1, 1, 1
 
 def activate(x):
-  return 1 if x>=0 else 0
+  return 1 if x >= 0 else 0
 
-
-
-def train_perceptron(inputs,desired_outputs,learning_rate,epochs):
-  global w1,w2,b
+def train_perceptron(inputs, desired_outputs, learning_rate, epochs):
+  global w1, w2, b
   for epoch in range(epochs):
     total_error = 0
     for i in range(len(inputs)):
-      A,B=inputs[i]
-      target_output= desired_outputs[i]
-      output =activate(w1*A+ w2*B+b)
-      error =target_output - output
+      A, B = inputs[i]
+      target_output = desired_outputs[i]
+      output = activate(w1 * A + w2 * B + b)
+      error = target_output - output
       w1 += learning_rate * error * A
       w2 += learning_rate * error * B
       b += learning_rate * error
@@ -21,20 +19,15 @@ def train_perceptron(inputs,desired_outputs,learning_rate,epochs):
     if total_error == 0:
       break
 
-
-inputs =[(0,0),(0,1),(1,1)]
-desired_outputs=[0,0,0,1]
-learning_rate =0.1
-epochs=100
-train_perceptron(inputs,desired_outputs,learning_rate,epochs)
+# Corrected desired_outputs
+inputs = [(0, 0), (0, 1), (1, 0), (1, 1)]
+desired_outputs = [0, 0, 0, 1]  # AND gate
+learning_rate = 0.1
+epochs = 100
+train_perceptron(inputs, desired_outputs, learning_rate, epochs)
 
 for i in range(len(inputs)):
-  A,B=inputs[i]
-  output = activate(w1*A+w2*B+b)
-  print(f"Input:({A},{B})  Output:{output}")
-  print(f"W0 W1 W2:({b},{w1}.w{w2}) Output: {output}")
-
-
-
-
-
+  A, B = inputs[i]
+  output = activate(w1 * A + w2 * B + b)
+  print(f"Input: ({A},{B})  Output: {output}")
+  print(f"W0 W1 W2: ({b}, {w1}, {w2}) Output: {output}")
